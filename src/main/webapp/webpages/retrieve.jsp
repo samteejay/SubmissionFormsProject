@@ -18,12 +18,10 @@
             <title>TripleC++ courses</title>
         </head>
         <body>
-        <form method="post" action="details">
-            Enter Customer ID : <input type="text" name="cid"/>
-            Enter Customer Name : <input type="text" name="cname"/>
-            Enter Customer Email Address : <input type="email" name="cemail"/>
-            <input type="submit" value="Submit"/>
-        </form>
+        <h1>Retrieve Customer Details</h1>
+        <h2>Details as submitted as follows: </h2>
+        <h5> ${customers} </h5>
+
         </body>
     </html>
 </f:view>

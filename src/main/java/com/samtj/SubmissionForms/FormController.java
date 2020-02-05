@@ -1,28 +1,40 @@
 package com.samtj.SubmissionForms;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FormController {
+    @Autowired
+    CustomersRepo repo;
 
-    @GetMapping("form")
-    public String index() {
+    @RequestMapping("/")
+    public String details() {
         return "form";
     }
 
-    @PostMapping("/view")
-    public String viewdetails(@RequestParam("cid") String cid,
-                              @RequestParam("cname") String cname,
-                              @RequestParam("cemail") String cemail,
-                              ModelMap mp)
-    {
-        mp.put("cid", cid);
-        mp.put("cname", cname);
-        mp.put("cemail", cemail);
+    @RequestMapping("/details")
+    public String details(Customers customers) {
+        repo.save(customers);
+        return "form";
+    }
+
+    @RequestMapping("/getdetails")
+    public String getdetails() {
         return "view";
     }
+
+    @PostMapping("/getdetails")
+    public ModelAndView getdetails(@RequestParam int cid)
+    {
+       ModelAndView mv = new ModelAndView("retrieve");
+       Customers customers = repo.findById(cid).orElse(null);
+       mv.addObject(customers);
+       return mv;
+    }
+
 }
