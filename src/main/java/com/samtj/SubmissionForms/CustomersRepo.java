@@ -1,7 +1,7 @@
 package com.samtj.SubmissionForms;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomersRepo extends CrudRepository<Customers, Integer> {
+public interface CustomersRepo extends JpaRepository<Customers, Integer> {
 
 }
